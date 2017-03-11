@@ -1,0 +1,73 @@
+<div class="ui grid">
+<div class="five columns" ng-repeat="x in data.details" style="cursor:pointer;padding-left:3%;padding-top:2%" ng-click="openBookingModal()">
+<div class="ui raised link card" style="background-color:#E0E0E0">
+  <div ng-class="{'booked-room': x.booked === 'Booked' , 'open-room': x.booked === 'Open'}">
+    <div class="header" style="color:white;font-size:1.5em;font-weight:bold;padding-left:10px;padding-top:5px">{{x.room}}</div>
+    <div class="meta">
+      <span class="category" style="color:white;font-weight:bold;padding-left:10px;padding-top:5px">{{x.booked}}</span>
+    </div>
+  </div>
+
+  <div class="extra content">
+    <div>
+      <table>
+      <tr >
+        <th>Booking</th>
+        <th>Timing</th>
+        </tr>
+      <tr ng-repeat="y in x.bookedBy">
+        <td>{{y.team}}</td>
+        <td style="padding-left: 31px;padding-right: 5px;">{{y.time}}</td>
+      </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ------------- Booking Modal ------------------------------ -->
+<div class="ui modal" id="book">
+    <div class="content">
+    <div class="ui grid">
+      <div class="eight wide column">
+        <table>
+        <tr >
+          <th>Booking</th>
+          <th>Timing</th>
+          </tr>
+        <tr ng-repeat="y in data.details">
+          <td>{{y.team}}</td>
+          <td style="padding-left: 31px;padding-right: 5px;">{{y.time}}</td>
+        </tr>
+        </table>
+      </div>
+      
+      <div class="eight wide column" style="text-align: center">
+        <h3>Book Conference Room</h3>
+        <form class="ui form">
+          <div class="field">
+              <label>Day</label>
+              <select class="ui dropdown">
+                <option value="{{today}}">Today</option>
+                <option value="{{tomorrow}}">Tomorrow</option>
+              </select>
+          </div>
+          <div class="field">
+              <label>From Date</label>
+              <input type="text" name="fromDate">
+              <label>To Date</label>
+              <input type="text" name="fromDate">
+          </div>
+          <div class="field">
+              <label>Team Name</label>
+              <input type="text" name="teamName">
+              <label>Booked By</label>
+              <input type="text" name="bookerName">
+          </div>
+          <button class="ui primary button" type="submit">Book</button>
+        </form>
+      </div>
+      
+  </div>
+  </div>
+</div>

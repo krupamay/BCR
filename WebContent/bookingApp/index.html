@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="main.css"/>
+    <link type="text/css" rel="stylesheet" href="semantic.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+    <script src="semantic.min.js"></script>
+    <script src="app.js">
+    </script>
+    <script type="text/javascript" src="partial/booking.js"></script>
+    <script type="text/javascript" src="partial/homepage.js"></script>
+    
+</head>
+
+<!-- ---------- Header ----------------- -->
+
+<body ng-app="bookingPortal" class="background">
+<p style="color:white; font-size:4em; padding-left:10%">BOOK Room Now
+<br><span style="margin-top:-5%;position:absolute;">______</span></p>
+    
+  <div>
+    <div ng-view></div>
+  </div>
+</body>
+
