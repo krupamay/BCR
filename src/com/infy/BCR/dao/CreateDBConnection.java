@@ -17,5 +17,26 @@ public class CreateDBConnection {
 		return con;
 		
 	}
+	
+	public static Connection DefaultJdbcTransaction() throws SQLException {
+		Connection connection = null;
+        try {
+            Class.forName("org.sqlite.JDBC").newInstance();
+
+            
+             connection = DriverManager.getConnection("jdbc:sqlite:C:/SQLite/Conference_Room_Booking.db");
+            
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            throw new SQLException(e);
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new SQLException(e);
+        }
+        return connection;
+    }
 
 }

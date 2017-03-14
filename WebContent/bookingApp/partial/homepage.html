@@ -1,8 +1,8 @@
 <div class="ui grid">
-<div class="five columns" ng-repeat="x in data.details" style="cursor:pointer;padding-left:3%;padding-top:2%" ng-click="openBookingModal()">
+<div class="five columns" ng-repeat="x in data" style="cursor:pointer;padding-left:3%;padding-top:2%" ng-click="openBookingModal(x.roomNo)">
 <div class="ui raised link card" style="background-color:#E0E0E0">
   <div ng-class="{'booked-room': x.booked === 'Booked' , 'open-room': x.booked === 'Open'}">
-    <div class="header" style="color:white;font-size:1.5em;font-weight:bold;padding-left:10px;padding-top:5px">{{x.room}}</div>
+    <div class="header" style="color:white;font-size:1.5em;font-weight:bold;padding-left:10px;padding-top:5px">{{x.roomName}}</div>
     <div class="meta">
       <span class="category" style="color:white;font-weight:bold;padding-left:10px;padding-top:5px">{{x.booked}}</span>
     </div>
@@ -10,7 +10,7 @@
 
   <div class="extra content">
     <div>
-      <table>
+      <table ng-if="x.bookedBy[0].team !== null">
       <tr >
         <th>Booking</th>
         <th>Timing</th>
@@ -20,6 +20,7 @@
         <td style="padding-left: 31px;padding-right: 5px;">{{y.time}}</td>
       </tr>
       </table>
+      <p ng-if="x.bookedBy[0].team === null" style="font-weight:bold">No bookings for today!</p>
     </div>
   </div>
 </div>
@@ -30,16 +31,23 @@
     <div class="content">
     <div class="ui grid">
       <div class="eight wide column">
+      <p>Appointments for today</p>
+              <p ng-if="dataOfRoom[0].bookingId === null">No bookings Yet!!</p>
         <table>
-        <tr >
+        <tr ng-if="dataOfRoom[0].bookingId !== null">
           <th>Booking</th>
-          <th>Timing</th>
+          <th style="padding-left: 31px;padding-right: 5px;">Timing</th>
+          <th style="padding-left: 31px;padding-right: 5px;">Purpose</th>
           </tr>
-        <tr ng-repeat="y in data.details">
-          <td>{{y.team}}</td>
-          <td style="padding-left: 31px;padding-right: 5px;">{{y.time}}</td>
+        <tr ng-repeat="y in dataOfRoom">
+          <td>{{y.teamName}}</td>
+          <td style="padding-left: 31px;padding-right: 5px;">{{y.startTime}} - {{y.endTime}}</td>
+          <td style="padding-left: 31px;padding-right: 5px;">{{y.purpose}}</td>
         </tr>
         </table>
+        <div class="ui floating message" ng-if="bookingSuccess">
+		  <p>Congrats!! you have successfully booked the room!</p>
+		</div>
       </div>
       
       <div class="eight wide column" style="text-align: center">
@@ -47,24 +55,30 @@
         <form class="ui form">
           <div class="field">
               <label>Day</label>
-              <select class="ui dropdown">
+              <select class="ui dropdown" ng-model="formObject.bookingDate">
                 <option value="{{today}}">Today</option>
                 <option value="{{tomorrow}}">Tomorrow</option>
               </select>
           </div>
           <div class="field">
-              <label>From Date</label>
-              <input type="text" name="fromDate">
-              <label>To Date</label>
-              <input type="text" name="fromDate">
+              <label>Start Time</label>
+              <input type="text" name="fromDate" ng-model="formObject.startTime">
+              <label>End Time</label>
+              <input type="text" name="fromDate" ng-model="formObject.endTime">
           </div>
+          
+          <div class="field">
+              <label>Purpose</label>
+              <input type="text" name="purpose" ng-model="formObject.purpose">
+          </div>
+          
           <div class="field">
               <label>Team Name</label>
-              <input type="text" name="teamName">
+              <input type="text" name="teamName" ng-model="formObject.teamName">
               <label>Booked By</label>
-              <input type="text" name="bookerName">
+              <input type="text" name="bookerName" ng-model="formObject.empId">
           </div>
-          <button class="ui primary button" type="submit">Book</button>
+          <button class="ui primary button" type="submit" ng-click="bookRoom()">Book</button>
         </form>
       </div>
       

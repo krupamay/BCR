@@ -1,6 +1,8 @@
 package com.infy.BCR.beans;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Bookings {
 	private Integer bookingId;
 	private Integer empId;
@@ -8,6 +10,7 @@ public class Bookings {
 	private String bookingDate;
 	private String startTime;
 	private String endTime;
+	private String bookingTime;
 	private String roomNo;
 	private String purpose;
 	
@@ -60,6 +63,12 @@ public class Bookings {
 	}
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
+	}
+	public String getBookingTime() {
+		return bookingTime;
+	}
+	public void setBookingTime(String bookingTime) {
+		this.bookingTime = bookingTime;
 	}
 	
 	

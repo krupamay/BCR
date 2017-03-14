@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.infy.BCR.beans.Bookings;
+import com.infy.BCR.beans.ConferenceRooms;
 import com.infy.BCR.dao.BookRoomDAO;
 
 public class HomePage {
@@ -14,12 +15,12 @@ public class HomePage {
 		//System.out.println("pradeep");
 		List<Bookings> bookingList=null;
 		BookRoomDAO dao=new BookRoomDAO();
-		bookingList=dao.getBookingDetails();
+		bookingList=dao.getBookingDetails("1");
 		
 		for(Bookings b:bookingList){
-			System.out.println(b.getBookingId());
-			System.out.println(b.getEmpId());
 			System.out.println(b.getTeamName());
+			System.out.println(b.getBookingTime());
+			//System.out.println(b.getEndTime());
 		}
 		System.out.println("Booking room.... ");
 		
@@ -40,7 +41,11 @@ public class HomePage {
 		book.setRoomNo("Mars");
 		book.setPurpose("Refinement");
 		BookRoomDAO dao1=new BookRoomDAO();
-		dao1.bookRooms(book);
+		List<ConferenceRooms> rooms=null;
+		rooms=dao1.getRoomDetails();
+		for(ConferenceRooms cr:rooms){
+			System.out.println(cr.getRoomName());
+		}
 
 	}
 
